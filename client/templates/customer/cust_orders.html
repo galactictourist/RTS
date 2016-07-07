@@ -1,0 +1,66 @@
+<template name="cust_orders">
+	<div class="row">
+			<div class="col-md-12">
+		{{#if Template.subscriptionsReady}} 
+				
+			
+					{{#each getOrders}}
+				 <a href="#{{orderId}}" data-toggle="collapse">
+				  <div class="row" style="border:3px solid #ba453b; width:85%; color:#216cc3; padding:5px; margin-bottom:10px;">
+				  <div style="color:#216cc3; display:inline-block;" class="col-md-3">{{#if showOrdersWithDelivered}}
+				  <span style="color:#ba453b;"><i class="fa fa-bolt"></i></span>{{/if}} <span style="font-size:larger;">Order ID: {{orderId}}</span></div>
+  				<div style="color:#216cc3; display:inline-block;" class="col-md-3"><span style="font-size:larger;">Ordered: {{formatTime orderDate}}</span></div>
+  				{{# if showArchive}}
+  				<div class="pull-right"><div style="color:#216cc3; display:inline-block;" class="col-md-3"><button class="btn btn-default btn-sm order-archive"  type="button" id="{{orderId}}oa">Archive order</button></div></div>
+  				{{/if}}
+
+
+  				 
+  				
+  			  </div>
+  			 </a>
+  					
+  			<div id="{{orderId}}" class="row collapse" style="background-color:#eee; padding:5px; margin-left:5px; margin-right:5px; margin-bottom:10px;border:2px solid #040e1b;">
+  				{{#each diagram}}
+  				<div class="row" style="margin-bottom: 5px;">
+      				<div style="color:#333; display:inline-block;" class="col-md-3"><span style="font-size:larger;"><strong>Diagram ID: {{id}}</strong></span></div>
+          			<div style="color:#333; display:inline-block;" class="col-md-3"><span style="font-size:larger;"><strong>Name: {{insName}}</strong></span></div>
+          			<div style="color:#333; display:inline-block;" class="col-md-5"><span style="font-size:larger;"><strong>Address: {{address}}</strong></span></div>
+				</div>
+  			
+  				<div class="row" style="position:relative; background-color:#fff; margin-bottom: 7px; margin-left:5px; margin-right:5px;padding:5px;">
+				
+      			
+          			<div class="col-md-2"><strong>Status: </strong>{{getStatus}}
+          					{{#if onDelivered}}
+          					<button class="btn btn-success btn-xs" id="btnShowFiles">Get files</button>
+          					{{/if}}
+          			</div>
+
+							{{#if upCharge}}
+					<div class="col-md-2"><strong>Ordered Facets: </strong>{{facets}}</div>
+					<div class="col-md-2"><strong>Actual Facets: </strong>{{qcFacets}}</div>
+					<div class="col-md-2"><strong>Facet Charge: </strong>${{facetUpCharge}}</div>
+							{{/if}}
+          			<div class="col-md-2"><strong>Price: </strong>{{price}}</div>
+          			<div class="col-md-2"><strong>ETA: </strong>{{expedite}} hrs</div>
+
+  				</div>
+
+          		<div id="fileBox">
+          			{{#if filesDivShow "show"}}
+          			{{> showFiles diagId = id}}
+          			{{/if}}
+          		</div>	
+				{{/each}}
+          	</div>
+
+      	{{/each}}
+      	
+      	{{else}}
+				{{> spinner}}
+			{{/if}}	
+          	</div><!--end big column -->
+         </div><!--end big row -->
+
+</template>

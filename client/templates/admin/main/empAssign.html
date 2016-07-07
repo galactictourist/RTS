@@ -1,0 +1,19 @@
+<template name="empAssign">
+
+	<div class="form-group">
+		<label class="plain">Assign</label>
+		<select data-id="" id="{{id}}assign" class="empAssign form-control">
+		<option disabled="disabled" value="none" selected="selected">Select</option> 
+		 {{#if toggleSelect}} 
+			 {{#if Template.subscriptionsReady}}
+				{{#each assignEmployee}}
+				<option value="{{_id}}">{{profile.firstName}} {{profile.lastName}} </option> 
+				{{/each}}
+				{{else}}
+				Loading...		
+			{{/if}}
+		 {{/if}}
+		</select>
+	</div>
+
+</template>

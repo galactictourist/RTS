@@ -1,0 +1,26 @@
+<template name="aqcDiv"> 
+		<div class="col-md-2">
+		{{#if isNotSelfQC}}
+		<label>Add Extra File</label>
+		<input style="font-size: x-large; background-size:10px" id="addFile{{id}}" class="addFile" type="checkbox" value="">
+		{{/if}}
+		</div>
+		<div class="col-md-4">
+			{{>a_fileList}}
+		</div>
+		
+		<div class="col-md-3">
+			<div class="form-group">
+
+					<label for="qcFacets">Facet Count</label>
+			      	<input type="text" data-id="{{id}}" style="max-width:50px;" class="form-control" id="{{id}}Facets" placeholder="">
+
+			    </div>
+		</div>
+		<div class="col-md-3">
+			<div class="form-group">
+			 <button style="margin:10px;" type="submit" id="{{id}}btnSendToCustomer" class="clickSendtoCust btn btn-primary">Send to Customer <i class="fa fa-external-link-square"></i></button>
+			</div>
+		</div>
+
+</template>

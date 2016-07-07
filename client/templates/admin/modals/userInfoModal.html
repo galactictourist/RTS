@@ -1,0 +1,92 @@
+<template name="userInfoModal">
+  {{#with userInfo}}
+    <div class="modal fade" id="user_info_modal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content credit-card-box">
+          <div class="modal-header"><h2>{{fullName}}</h2>
+          </div>
+          <div class="modal-body">
+           <div class="container-fluid">
+            <div class="row">
+            {{#if userHaveSubscription}}
+
+              <h4>Already on a plan
+              </h4>
+              Current Plan: 
+              {{currentSubscription}}
+              <br>
+              change it
+              {{#if cardataexists}}
+              <div class="col-md-3">Plan:
+                <select class="form-control" id="new_plan_from_admin_select">
+                  <option disabled="disabled" selected="selected" value="">Select</option>
+                  <option value="0">Default</option>
+                  <option data-starttotal="24.99" value="mt1">M1</option>
+                  <option data-starttotal="19.99" value="mt2">M2</option>
+                  <option data-starttotal="24.99" value="yt1">Y1</option>
+                  <option data-starttotal="19.99" value="yt2">Y2</option>
+                  <option data-starttotal="29.99" value="s27">S27</option>
+                  <option data-starttotal="29.99" value="s15">S15</option>
+                  <option data-starttotal="29.99" value="allCat">allCat</option>
+                </select>
+              </div><br>
+               {{else}}
+               <div class="col-md-3">Plan:
+                 <select class="form-control" id="new_plan_from_admin_select">
+                   <option disabled="disabled" selected="selected" value="">Select</option>
+                   <option value="0">Default</option>
+                   <option data-starttotal="29.99" value="s27">S27</option>
+                   <option data-starttotal="29.99" value="s15">S15</option>
+                   <option data-starttotal="29.99" value="allCat">allCat</option>
+                 </select>
+               </div><br>
+              {{/if}}
+              {{else}}
+              <h4>Status: Currently not on a plan
+              </h4>
+             
+              {{#if cardataexists}}
+              <div class="col-md-3">Plan:
+                <select class="form-control" id="new_plan_from_admin_select">
+                  <option disabled="disabled" selected="selected" value="">Select</option>
+                  <option value="0">Default</option>
+                  <option data-starttotal="24.99" value="mt1">M1</option>
+                  <option data-starttotal="19.99" value="mt2">M2</option>
+                  <option data-starttotal="24.99" value="yt1">Y1</option>
+                  <option data-starttotal="19.99" value="yt2">Y2</option>
+                  <option data-starttotal="29.99" value="s27">S27</option>
+                  <option data-starttotal="29.99" value="s15">S15</option>
+                  <option data-starttotal="0.00" value="allCat">allCat</option>
+                </select>
+              </div><br>
+               {{else}}
+               <div class="col-md-3">Plan:
+                 <select class="form-control" id="new_plan_from_admin_select">
+                   <option disabled="disabled" selected="selected" value="">Select</option>
+                   <option value="0">Default</option>
+                   <option data-starttotal="29.99" value="s27">S27</option>
+                   <option data-starttotal="29.99" value="s15">S15</option>
+                   <option data-starttotal="0.00" value="allCat">allCat</option>
+                 </select>
+               </div><br>
+              {{/if}}
+            {{/if}}
+          </div>
+           </div>
+            </div>
+          <div class="modal-footer">
+            {{#if userHaveSubscription}}
+              <button class="btn btn-default" id="change_user_plan_admin" type="button">Change Plan</button>
+              {{else}}
+              <button class="btn btn-default" id="suscribe_user_plan_admin" type="button">Subscribe to plan
+              </button>
+            {{/if}}
+            <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/with}}
+</template>

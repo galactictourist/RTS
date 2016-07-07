@@ -1,0 +1,20 @@
+<template name="layout_auth">
+	{{> auth_header}}
+	<span style="display:block; margin-top: 150px;"><div class="container-fluid">
+		<div class="row">
+			<div class="col-md-2"></div>
+		
+		
+			<div class="col-md-8">
+			<h3>{{> sAlert}}</h3>
+      			{{> yield}}
+			</div>
+		
+		
+			<div class="col-md-2">
+
+			</div>
+		</div>
+	</div></span>
+{{> auth_footer}}
+</template>

@@ -1,0 +1,187 @@
+<template name="c_home">
+
+  	<div style="margin-bottom:5px;" class="row">
+        <div style="float: none; margin: 0 auto;" class="col-md-12">
+	         	<div class="emppanel with-nav-tabs panel-primary">
+	                <div class="panel-heading">
+	                        <ul class="nav nav-tabs">
+	                            <li class="active"><a href="#home" data-toggle="tab"><h5><i class="fa fa-bolt"></i> New Order</h5></a></li>
+	                            <li><a href="#myorders" data-toggle="tab"><h5><i class="fa fa-tachometer"></i> Order Status {{#if newOrderCount}}
+	                            		<span class="label label-info">{{newOrderCount}}</span>
+	                            		{{/if}}</h5></a></li>
+	                           	<li><a href="#archive" data-toggle="tab"><h5><i class="fa fa-archive"></i> Order Archive</h5></a></li>
+	                            <li><a href="#account" data-toggle="tab"><h5><i class="fa fa-info-circle"></i> Account</h5></a></li>
+	                            {{#if showUpgrade}}
+	                            <li><a href="#upgrade" data-toggle="tab"><h5><i class="fa fa-diamond"></i> Upgrade</h5></a></li>
+	                            {{/if}}
+	                            <li style="float:right;"><div style="margin-right:5px;"><h5><i class="fa fa-thumbs-o-up"></i> {{#with currentUser}}{{#with profile}}Hello, {{firstName}}{{/with}}{{/with}}</h5></div></li>
+
+	                        </ul>
+	                </div>
+	                <div class="panel-body">
+	                    <div class="tab-content">
+                        	<div class="tab-pane fade in active" id="home"><!--  Begin Home Tab -->
+                        		<div class="container-fluid">
+
+                        			<div class="row">
+
+                        			</div>
+
+                        			<div class="row">
+                        				<div class="col-md-12 empdash">
+
+                        				{{> new_order}}
+
+						              	</div><!--end big column -->
+						             </div><!--end big row -->
+
+
+								</div>
+
+                        	</div>
+                        	<div class="tab-pane fade" id="myorders">
+
+                        		<div class="container-fluid">
+
+                        			{{> cust_orders}}
+
+									</div><!-- end container -->
+
+
+							</div><!--end myorders pane-->
+							<div class="tab-pane fade" id="archive">
+                        		<div class="container-fluid">
+
+                        			{{> cust_archive}}
+
+
+								</div>
+
+                        	</div>
+
+	                        <div class="tab-pane fade" id="account">
+	                        	<div style="border:1px solid #eee;" class="container-fluid">
+
+	                        			<div style="margin-bottom:15px; background-color:#90d1fc; border:1px solid #0a2339;" class="row">
+	                        				<div class="col-md-12">
+	                        				<h4>Account Information</h4>
+	                        				</div>
+	                        			</div>
+
+	                        			<div class="row">
+	                        				<div class="col-md-6">
+	                        				{{#if planCheck}}
+	                        				<h4>Active discount plan: {{planCheck}}</h4><br><br>
+	                        				<button class="btn btn-default" type="button" id="unsubscribe_plan">Unsubscribe from {{planCheck}}</button>
+	                        				{{/if}}
+	                        				</div>
+	                        			</div>
+
+	                        			<div style="padding:10px;" class="row">
+	                        				
+	                        				<hr>
+	                        				<i class="fa fa-pencil"></i> Click in field to edit. Enter to save.<br><br>
+	                    						<div class="row">
+		                    						 {{#each getData}}
+
+		                    						<div class="col-md-2">
+					              						<strong>First Name:</strong><div class="editable-text-trigger editField"> {{> editableText collection="users" field="profile.firstName"}}
+							              			 	</div>
+		        									</div>
+		        									<div class="col-md-2">
+					              						<strong>Last Name:</strong><div class="editable-text-trigger editField"> {{> editableText collection="users" field="profile.lastName"}}
+							              			 	</div>
+		        									</div>
+		        									<div class="col-md-2">
+					              						<strong>Phone:</strong><div class="editable-text-trigger editField"> {{> editableText collection="users" field="profile.phone"}}
+							              			 	</div>
+		        									</div>
+		        									<div class="col-md-2">
+		        										<strong>Email:</strong><div class="editable-text-trigger editField"> {{> editableText collection="users" field="emails.0.address"}}
+		              			 						</div>
+		              			 					</div>
+													{{/each}}
+												</div>
+												<hr>
+												<div style="bottom-margin:10px;" class="row">
+													<div class="col-md-12">
+	                        							<h4>Change Password</h4>
+	                        						</div>
+                        						</div>
+												
+												<div class="row">
+													<div class="col-md-2">
+					              						<strong>Current Password:</strong><input type="text" class="form-control plain" id="password"/>
+							              			 	</div>
+		        									
+		        									<div class="col-md-2">
+					              						<strong>New Password:</strong><input type="password" class="form-control plain" id="password-new" placeholder="at least 6 characters" />
+							              			 	</div>
+		        									
+		        									<div class="col-md-2">
+					              						<strong>New Password Again:</strong><input type="password" class="form-control plain" id="password-confirm" placeholder="at least 6 characters" />
+							              			 	</div>
+		        									
+		        									<div style="vertical-align: middle" class="col-md-2">
+		        										<button type="submit" id="change-password" class="btn btn-orangeltbg btn-md">Change Password</button>
+		              			 						</div>
+	              			 				
+												</div>
+						      			</div>
+						      		
+						              	
+								</div><!-- end container -->
+
+
+	                        </div>
+	                       <div class="tab-pane fade" id="upgrade"><!--  Begin Home Tab -->
+                        		<div class="container-fluid">
+	                        		<div style="border:2px solid #cb4844; float: none;margin: 0 auto;" class="col-md-12">
+
+
+	                        				<h3 style="margin-bottom:25px;"><span style="color:#cc453a;">Save money with a monthly or yearly subscription plan!</span></h3>
+	                        				<div style="background-color:#040e1b; color:#90d0fb;" class="row">
+	                        					<div style="border-right:1px solid #fff; text-align:center;" class="col-md-6"><h4><i class="fa fa-calendar"></i> Monthly Plans</h4></div>
+	                        					<div style="text-align:center;" class="col-md-6"><h4><i class="fa fa-calendar-plus-o"></i> Yearly Plans</h4></div>
+
+	                        				</div>
+	                        				<div class="row">
+	                        					<div class="col-md-3"><h3><span style="color:#216bc3;">Monthly Tier 1</span></h3>
+	                        						<strong>Save $$</strong><br>
+	                        						<button style="margin-top:25px;" id="subscriptions_buttons" data-planid="mt1" data-total="39.99" data-grandtotal="24.99" type="button" class="btn-sm btn-orangeltbg navbar-btn"><strong data-planid="mt1" data-total="39.99" data-grandtotal="24.99">Buy $$/mo</strong></button>
+	                        					</div>
+	                        					<div class="col-md-3"><h3><span style="color:#216bc3;">Monthly Tier 2</span></h3>
+	                        						<strong>Save $$</strong><br>
+	                        						<button style="margin-top:25px;" id="subscriptions_buttons" data-planid="mt2" data-total="69.99"  data-grandtotal="19.99" type="button" class="btn-sm btn-orangeltbg navbar-btn"><strong data-planid="mt2" data-total="69.99"  data-grandtotal="19.99">Buy $$/mo</strong></button>
+	                        					</div>
+	                        					<div class="col-md-3"><h3><span style="color:#216bc3;">Yearly Tier 1</span></h3>
+	                        						<strong>Save $$</strong><br>
+	                        						<button style="margin-top:25px;" id="subscriptions_buttons" data-planid="yt1" data-total="249.99" data-grandtotal="24.99" type="button" class="btn-sm btn-orangeltbg navbar-btn"><strong data-planid="yt1" data-total="249.99" data-grandtotal="24.99">Buy $$/yr</strong></button>
+	                        					</div>
+	                        					<div class="col-md-3"><h3><span style="color:#216bc3;">Yearly Tier 2</span></h3>
+	                        						<strong>Save $$</strong><br>
+	                        						<button style="margin-top:25px;" id="subscriptions_buttons" data-planid="yt2" data-total="499.99"  data-grandtotal="19.99" type="button" class="btn-sm btn-orangeltbg navbar-btn"><strong data-planid="yt2" data-total="499.99"  data-grandtotal="19.99">Buy $$/yr</strong></button>
+	                        					</div>
+
+	                        				</div>
+	                        				<div class="row" style="background-color:#eee; white-space:wrap; padding:15px;">
+	                        					<div class="col-md-12">
+	                        						<i class="fa fa-exclamation-circle"></i> These memberships are auto-renewing for your convenience and must be initiated and terminated from here inside your account dashboard. Monthly memberships start on the date ordered and end exactly one month later. Yearly memberships start on the date they are initiated and end exactly twelve months later.
+
+
+	                        					</div>
+
+	                        				</div>
+									</div><!--end center div-->
+
+
+								</div><!--end container-->
+
+                        	</div><!--end upgrade tab-->
+
+	                    </div><!--end tab content -->
+	                </div><!--panel body end-->
+	            </div><!--end main panel-->
+		</div><!--end big col-->
+	</div>
+</template>

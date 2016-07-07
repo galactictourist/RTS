@@ -1,0 +1,17 @@
+<template name="showFiles">
+<div style="margin-bottom: 10px; background-color:#fff; padding:5px; border:3px solid #216cc3; margin-right:5px; margin-left:5px;" class="row">
+
+					              					
+	<div class="col-md-4"><strong>Delivered On:</strong> {{formatTime deliveredDate}} </div>
+			
+	{{#each getFiles}}
+
+		<div class="col-md-3"><strong>File:</strong> {{name}} <a href="{{url}}" target="_blank"><button class="btn btn-default btn-sm" type="button" id="{{name}}"><strong>Download</strong></button></a></div>
+		
+	{{/each}}
+	{{#if notArchived}}
+	<div class="col-md-2"><button class="btn btn-success btn-sm" id="btnFeedback"><strong>How'd we do?</strong></button></div>
+	{{/if}}
+</div>	
+
+</template>

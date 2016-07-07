@@ -1,0 +1,81 @@
+<template name="a_emp_bar_modal">
+
+	<div class="modal" id="empDiagModal" role="dialog">
+			  		<div class="modal-dialog modal-lg">
+			    		<div class="modal-content">
+
+							<div class="modal-header">
+	       				 	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+	       				 	</button>
+	        				<h4 class="modal-title" id="empModalLabel">Assigned diagrams for {{modalEmpName}}</h4>
+	     					</div>
+			      				<div class="modal-body">
+			      					<div class="container-fluid">
+			        			
+					        			{{#if Template.subscriptionsReady}}
+												{{#each empDiagram}}
+						        			<div class="row" style="border: 2px solid {{borderColorStatus}} margin-bottom:10px;">
+						        				<div class="col-md-12 diags">
+						        					<div class="row" style="margin-bottom:5px;">
+						        						<div class="col-md-3">
+						        							<h4><span id="d-ID" class="label label-success">{{diagStatus}}</span></h4>
+						        						</div>
+						        						<div class="col-md-3"><strong>Order ID: {{oid}}</strong> 
+						        						</div>
+						        						<div class="col-md-3">
+						        							<strong>Diagram ID: {{id}}</strong>
+						        						</div>
+						        						<div class="col-md-3">
+						        							<strong>{{momentDuration}}</strong>
+						        						</div>
+						        					</div>
+						        					<div class="row" style="margin-bottom:5px;">
+						        						<div class="col-md-8">
+						        							<strong>Address:</strong> {{address}}
+						        						</div>
+						        						<div class="col-md-4">
+						        							<strong>Type:</strong> {{structure}}
+						        						</div>
+						        					</div>
+						        					<div class="row" style="margin-bottom:5px;">
+						        						<div class="col-md-2">
+						        							<strong>Report:</strong> {{reporttype}}
+						        						</div>
+						        						<div class="col-md-2">
+						        							<strong>Pitch:</strong> {{pitch}}
+						        						</div>
+						        						<div class="col-md-2">
+						        							<strong>Facets:</strong> {{facets}}
+						        						</div>
+						        						<div class="col-md-1">
+						        						
+						        							<a class="btn btn-default btn-sm clearfix" href="http://maps.google.com/maps?q={{lat}},{{lon}}&z=25&t=k" target="_blank"><span style="color: #216cc3;">Map</span></a>
+						        						</div>
+						        						<div style="display:inline-block;" class="col-md-5">
+						        							{{#each imgurls}}
+					              								<a class="btn btn-default btn-sm clearfix" href="{{this}}" target="_blank"><span style="color: #216cc3;"><i class="fa fa-file-image-o fa-lg"></i></span></a>
+					              							{{/each}}
+						        							
+						        						</div>
+						        					</div>
+						        					
+								              	</div><!--end big column -->
+								             </div><!--end big row -->
+					            
+
+										{{/each}}	
+
+										{{else}}
+										Loading...	
+										{{/if}}	
+									</div><!-- end container -->
+			      				</div>
+			      			<div class="modal-footer"></div>
+			        
+			
+			    		</div>
+			  		</div>
+			  	</div>
+			      		
+			     
+</template>

@@ -1,0 +1,27 @@
+<template name="a_fileList">
+          
+               
+                    <div style="" class="container-fluid">
+                    <div class="form-group">
+                    <form id="sketchUpload" method="post" enctype="multipart/form-data">
+
+                        <div class="row">
+                            <div class="col-md-12"> <label>Upload {{reporttype}}</label> <input class="form-control" id="{{id}}files" type="file"><span style="float:right; margin-top:5px;"><button id="{{id}}btnFileUp" class="fileUp btn btn-primary btn-sm" type="submit">Upload</button></span></div>
+                        </div>
+
+                    </form>   
+                    {{#if Template.subscriptionsReady}}
+                      {{#each theFiles}}    
+                        <div class="row" style="margin-top:10px;">             
+                              <div class="col-md-6">  <a href="{{qsketchUrl}}{{XtrasketchUrl}}" target="_blank">{{qsketchName}}{{XtrasketchName}}</a></div>    
+                               <div class="col-md-3"> <a class="btn btn-danger btn-sm deleteUpload">Delete</a>  </div>         
+                        </div>             
+                        {{/each}} 
+                    {{else}}
+                    Loading...  
+                    {{/if}} 
+                        </div>
+                    </div>
+
+</template>
+

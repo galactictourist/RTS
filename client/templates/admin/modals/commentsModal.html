@@ -1,0 +1,29 @@
+<template name="commentsModal">
+	 <div class="modal fade" id="comments_modal" role="dialog">
+    	<div class="modal-dialog">
+      
+      		<div class="modal-content">
+        		<div class="modal-header" style="border-bottom:2px solid #ba453b; background-color:#eee;"><span style="color:#ba453b; font-size:large;"><strong><i class="fa fa-bullhorn"></i> Customer comments </strong></span></div>
+        
+       			<div class="modal-body">
+         			<div class="container">
+
+            			<div class="row" style="margin-bottom:10px;">
+
+			              <div class="col-md-6">
+			               {{getComment}}
+			              </div>
+             
+          				</div>
+       				 </div>
+       			</div>
+        <div class="modal-footer" style="background-color:#216cc3;">
+         
+          <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</template>

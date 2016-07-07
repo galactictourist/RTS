@@ -1,0 +1,27 @@
+
+
+.middlebg { 
+   background: url(/img/homebg.png) no-repeat; 
+     
+  background-size: 100% 100%;
+   /* Set rules to fill background */
+  
+	height:auto;
+	width:100%;
+  
+  }
+
+
+@media screen and (max-width: 500px) /* Mobile */ {
+	.middlebg { 
+	   background: #6b94c4;
+	     
+	  background-size: 100% 100%;
+	   /* Set rules to fill background */
+	  
+		height:auto;
+		width:100%;
+	  
+	  }
+
+  }

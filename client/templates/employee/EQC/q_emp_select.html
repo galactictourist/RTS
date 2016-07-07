@@ -1,0 +1,96 @@
+<template name="q_emp_select">
+	<div style="margin-top:35px; position:relative;" class="container-fluid">
+        		{{#if Template.subscriptionsReady}}
+					{{#each selectedOrderInQC}}
+						
+							
+						
+    					<div id="{{id}}" style="position:relative; width:100%; border: 2px solid {{borderColorStatus}} margin-bottom:30px; display:inline-block;" class="qcblock list-group-item clearfix">
+    					<div style="width:auto; padding:5px; border:1px solid #eee; height:30px; position:absolute; top:-33px; left:0px;">
+							<div class="input-group input-group-lg">
+		  					
+		  					<span style="white-space:nowrap; margin-right:5px;"><label>Claim QC</label></span>
+		 					 <span><input style="font-size: x-large; background-size:10px" id="myqc{{id}}" class="qcCheck" type="checkbox" value=""></span>
+							
+							</div>
+						</div>
+							<div style="width:auto; padding:5px; text-align:right; border:1px solid #eee; height:30px; position:absolute; top:-33px; right:0px;">
+							<span style="font-size:larger;"><strong>By: {{sketcherName}} | Order ID: {{oid}}</strong></span></div>
+    					
+              				<div class="row" style="margin-bottom:10px; border-bottom: 1px solid #eee; padding:5px;">
+              					<div class="col-md-2" style="white-space:nowrap;">
+              						{{> eta}} <strong>ID: {{id}}</strong>
+              					</div>
+              					
+              					<div class="col-md-6">
+              						<strong>Address:</strong> {{address}}
+              					</div>
+              					<div class="col-md-2">
+              						<a style="margin-right:5px;" class="btn btn-default btn-sm clearfix" href="http://maps.google.com/maps?q={{lat}},{{lon}}&z=25&t=k" target="_blank"><span style="color: #216cc3;">Map</span></a>
+              					</div>
+              					<div class="col-md-2">
+              						{{#each imgurls}}
+              						<a class="btn btn-default btn-sm clearfix" href="{{this}}" target="_blank"><span style="color: #216cc3;"><i class="fa fa-file-image-o fa-lg"></i></span></a>
+              						{{/each}}
+              					</div>
+
+              				</div>
+              				<div class="row" style="margin-bottom:10px; border-bottom: 1px solid #eee; padding:5px;">
+              					<div class="col-md-3">
+              						<h4>Status: <span id="d-ID" class="label label-info"> {{dStatus}}</span></h4>
+              					</div>
+              					<div class="col-md-2">
+              					<strong> {{momentDuration}}	</strong>
+              					</div>
+              					<div class="col-md-2">
+              						<strong>Name:</strong> {{insName}}
+              					</div>
+              					<div class="col-md-2">
+              						<strong>Price:</strong> {{price}}
+              					</div>
+              					<div class="col-md-2">
+              						<strong>Type:</strong> {{structure}}
+              					</div>
+              				</div>
+              				<div class="row" style="margin-bottom:10px; border-bottom: 1px solid #eee; padding:5px;">
+              					
+              					<div class="col-md-2">
+              						<strong>Report:</strong> {{reporttype}}
+              					</div>
+              					<div class="col-md-2">
+              						<strong>Pitch:</strong> {{pitch}}
+              					</div>
+              					<div class="col-md-2">
+              						<strong>Facets:</strong> {{EmpOnefacets}} <label id="{{id}}fCount" style="display:none;">{{facetCount}}</label>
+              					</div>
+              					
+	              				{{#each getFiles}}
+	              				<div class="col-md-3"><a href="{{esketchUrl}}" target="_blank">
+	              				<h5>{{esketchName}}</h5></a></div>
+	              			
+	              				{{/each}}
+
+              				</div>
+	             			
+				             <div class="row">
+				             	<div style="margin-top:10px;">
+				              		<div class="col-md-12">
+				              			{{> eqcDiv}}  
+									</div>
+								
+								</div>					
+							</div><!--end second row-->
+							</div>
+							
+						
+					{{/each}}	
+
+				{{else}}
+				{{> spinner}}
+				{{/if}}	
+			</div><!-- end container -->
+
+
+
+
+</template>

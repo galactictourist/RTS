@@ -1,0 +1,36 @@
+
+<body>
+  {{renderPage}}
+</body>
+
+<template name="admin_layout">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        {{> admin_nav}}
+      </div>
+    </div>
+    <span style="display:block; margin-top: 130px;">
+    <div class="row">
+      <div class="col-md-12">
+       {{> sAlert}}   
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        {{> yield}}
+      </div>
+    </div>
+     
+
+    </span>
+    <div class="row">
+      <div class="col-md-12">
+        {{> a_footer}}
+      </div>
+    </div>
+  </div>
+
+</template>

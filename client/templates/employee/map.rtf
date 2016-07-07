@@ -1,0 +1,45 @@
+Main Employee
+---------------------------------------------------         
+
+
+[emp_home]
+
+	Data = 
+
+ 		 self.subscribe('usersOne', emp);
+         self.subscribe('todayEmp', emp);
+         self.subscribe('sketches');
+         self.subscribe('empMsg',emp);
+         self.subscribe('employees');
+         self.subscribe('sketchCount');
+         self.subscribe('qcPool');
+
+--------------------------------------------------------         
+
+ (TABS) QC or Diagrams depending on if goqc is clicked
+--------------------------------------------------------
+
+ (QC) QC POOL
+
+ Begins when QC tab clicked 'click #eqcTab': in [emp_home]
+
+ [q_emp]
+
+ 	Data = INHERIT
+
+--------------------------------------------------------
+
+
+ (DIAGRAMS)
+
+ [esketch]
+
+ 	Data = 
+
+ 		self.subscribe('empOrders', emp);
+        self.subscribe('qcPool');
+
+
+        Send to QC or Send to Customer if Employee 2
+
+        [eqcDiv]

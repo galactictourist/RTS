@@ -1,0 +1,1 @@
+tempImgs = new Mongo.Collection(null);

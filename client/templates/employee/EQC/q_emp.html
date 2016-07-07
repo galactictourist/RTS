@@ -1,0 +1,56 @@
+<template name="q_emp">
+
+
+	<div style="margin-top:35px; position:relative;" class="container-fluid">
+            {{#if Template.subscriptionsReady}}
+          {{#each orderinqc}}
+            
+              
+            
+              <div id="{{id}}" style="position:relative; width:100%; border: 2px solid {{borderColorStatus}} margin-bottom:30px; display:inline-block;" class="qcblock list-group-item clearfix">
+              <div style="width:auto; padding:5px; border:1px solid #eee; height:30px; position:absolute; top:-33px; left:0px;">
+              <div class="input-group input-group-lg">
+                
+                <span style="white-space:nowrap; margin-right:5px;"><label>Claim QC</label></span>
+               <span><input style="font-size: x-large; background-size:10px" id="myListqc{{id}}" class="listqcCheck" type="checkbox" value=""></span>
+              
+              </div>
+            </div>
+              <div style="width:auto; padding:5px; text-align:right; border:1px solid #eee; height:30px; position:absolute; top:-33px; right:0px;">
+              <span style="font-size:larger;"><strong>By: {{sketcherName}} | Order ID: {{oid}}</strong></span></div>
+              
+                      <div class="row" style="margin-bottom:10px; border-bottom: 1px solid #eee; padding:5px;">
+                        <div class="col-md-2" style="white-space:nowrap;">
+                          {{> eta}} <strong>ID: {{id}}</strong>
+                        </div>
+                        
+                        <div class="col-md-6">
+                          <strong>{{momentDuration}}</strong> 
+                        </div>
+                        
+                      </div>
+                    </div>
+       
+          {{/each}} 
+
+        {{else}}
+        {{> spinner}}
+        {{/if}} 
+      </div><!-- end container -->
+
+
+</template>
+
+<template name="qempDiagEta">
+{{#if qdiagetaStatus "6"}}
+	<span style="color:red; margin:0px;"><i class="fa fa-rocket fa-lg"></i></span>
+{{else}}
+	<span style="color: #216cc3; margin:0px;"><i class="fa fa-paper-plane fa-lg"></i></span>
+{{/if}}
+</template>
+
+
+
+
+
+

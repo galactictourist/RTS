@@ -1,0 +1,77 @@
+<template name="cust_mgmt">
+<div class="pull-right"><h2>Customer Management</h2></div>
+<div style="margin-bottom:10px;" class="row">
+    			<div class="col-md-2"><button type="submit" id="addCust" class="btn btn-orangeltbg btn-md">Add Customer</button></div>
+    			<div class="col-md-8"><h4><i class="fa fa-exclamation-circle"></i> Plan - Subscriptions Key:</h4><h4> m1 = monthly tier 1. y1 = yearly tier 1. Special Discount Plans: S27, S15. 0 = Default.</h4></div>
+    		</div>
+
+
+			<div style="margin-bottom: 20px;" class="row">
+
+				<div class="col-md-2">First Name: <input type="text" class="form-control plain" id="f_name"/></div>
+				<div class="col-md-2">Last Name: <input type="text" class="form-control plain" id="l_name"/></div>
+				<div class="col-md-2">Email: <input type="text" class="form-control plain" id="email"/></div>
+				<div class="col-md-2">Phone: <input type="text" class="form-control plain" id="phone"/></div>
+				<div class="col-md-2">Plan:
+					<select  id="planSelect" class="form-control">
+						<option value="" disabled="disabled" selected="selected">Select</option>
+						<option value="0">Default</option>
+						<option value="mt1">M1</option>
+						<option value="mt2">M2</option>
+						<option value="yt1">Y1</option>
+						<option value="yt2">Y2</option>
+						<option value="s27">S27</option>
+						<option value="s15">S15</option>
+					</select>
+				</div>
+				<div class="col-md-2">Password: <input type="text" placeholder="6 or more characters" class="form-control plain" id="password"/></div>
+			</div>
+
+
+
+	  	<div style="background-color:#eee; border:2px solid #040e1b; font-size:larger;" class="row">
+	  	<div class="col-md-1"><strong>Login</strong></div>
+	  	<div class="col-md-1"><strong>Update</strong></div>
+	  		<div class="col-md-2"><strong>First Name</strong>
+			 	</div>
+			 	<div class="col-md-2"><strong>Last Name</strong>
+			 	</div>
+			 	<div class="col-md-2"><strong>Email</strong>
+			 	</div>
+			 	<div class="col-md-2"><strong>Phone</strong>
+			 	</div>
+			 	<div class="col-md-1"><strong>Plan</strong>
+			 	</div>
+			 	<div class="col-md-1"><strong>Sign up</strong></div>
+
+
+	  	</div>
+	  	 {{#if Template.subscriptionsReady}}
+		{{#each getCustomers}}
+	  	<div style="border:1px solid #040e1b; margin-top:3px; padding:5px; font-size:larger;" class="row" id="">
+	  	<div style="border-right:1px solid #eee;" class="col-md-1">
+	  	<button id="{{_id}}" class="impersonate btn btn-orangeltbg btn-xs">Go</button>
+			 	</div>
+			 	<div style="border-right:1px solid #eee;" class="col-md-1">
+	  	      <button id="user_item_managment" class="btn btn-orangeltbg btn-xs" data-cardataexists="{{showChangeButton this._id}}">Change</button>
+			 	</div>
+	  		<div style="border-right:1px solid #eee;" class="col-md-2">{{profile.firstName}}
+			 	</div>
+			 	<div style="border-right:1px solid #eee;" class="col-md-2">{{profile.lastName}}
+			 	</div>
+			 	<div style="border-right:1px solid #eee;" class="col-md-2">{{emails.[0].address}}
+			 	</div>
+			 	<div style="border-right:1px solid #eee;" class="col-md-2">{{profile.phone}}
+			 	</div>
+			 	<div style="border-right:1px solid #eee;" class="col-md-1">{{profile.plan}}
+			 	</div>
+			 	<div class="col-md-1">{{custSignUpDate createdAt}}</div>
+
+
+	  	</div>
+
+	  	{{/each}}
+	  	{{else}}
+		Loading...
+		{{/if}}
+</template>

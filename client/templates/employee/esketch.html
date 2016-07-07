@@ -1,0 +1,100 @@
+<template name="esketch">
+	<div class="container-fluid">
+                        			
+    				{{#if Template.subscriptionsReady}}
+						{{#each empdiagram}}
+							
+    				
+							
+              			<div style="width:100%; margin-top:30px; position:relative; border: 2px solid {{borderColorStatus}} margin-bottom:7px;" class="list-group-item clearfix">
+              				<div style="width:200px; height:30px; position:absolute; top:-25px; right:0px;"><span style="font-size:larger;"><strong>Order ID: {{oid}}</strong></span></div>
+              				<div class="row" style="white-space:nowrap; margin-bottom:10px; max-height:40px; border-bottom: 1px solid #eee; padding:5px;">
+              					<div class="col-md-2" style="white-space:nowrap;">
+              						{{> eDiagEta}} <strong>ID: {{id}}</strong>
+              					</div>
+              					<div class="col-md-2" style="white-space:nowrap;">
+              						<strong> {{momentDuration}}</strong>
+              					</div>
+              					
+              					<div class="col-md-4">
+              						<strong>Address:</strong> {{address}}
+              					</div>
+              					<div style="text-align:right;" class="col-md-1">
+              						<a style="margin-right:5px;" class="btn btn-default btn-sm clearfix" href="http://maps.google.com/maps?q={{lat}},{{lon}}&z=25&t=k" target="_blank"><span style="color: #216cc3;">Map</span></a>
+              					</div>
+              					<div style="white-space: nowrap; display:inline;" class="col-md-3">
+              					<div>
+              						{{#each imgurls}}
+              						<a class="btn btn-default btn-sm" href="{{this}}" target="_blank"><span style="color: #216cc3;"><i class="fa fa-file-image-o fa-lg"></i></span></a>
+              						{{/each}}
+              					</div>
+              					</div>
+
+              				</div>
+              				<div class="row" style="margin-bottom:10px; border-bottom: 1px solid #eee; padding:5px;">
+              					<div class="col-md-4">
+              						<h4>Status: <span id="d-ID" class="label label-success"> {{dStatus}}</span></h4>
+              					</div>
+              					
+              					<div class="col-md-2">
+              						<strong>Report:</strong> {{reporttype}}
+              					</div>
+              					<div class="col-md-2">
+              						<strong>Pitch:</strong> {{pitch}}
+              					</div>
+              					<div class="col-md-2">
+              						<strong>Facets:</strong> {{facets}}<label id="fCount" style="display:none;">{{facetCount}}</label>
+              					</div>
+              					<div class="col-md-2">
+              						<strong>Type:</strong> {{structure}}
+              					</div>
+
+              				</div>
+              				<div class="row" style="margin-bottom:10px; padding:5px;">
+              					
+              					<div class="col-md-2">
+              					
+              						<div class="form-group">
+										<label class="plain">Update</label>
+										<select data-id="{{id}}" id="update" class="form-control">
+										{{updateStatus}}
+								
+										</select>
+									</div>
+	              				
+              						
+              					</div>
+              					<div class="col-md-10">
+	              				 
+									     {{#if qcDivShow "show"}}
+  
+                          {{> eqcDiv}}
+                        {{/if}}
+                        
+									
+              					</div>
+              					
+
+              				</div>
+              					
+						</div>
+						
+					{{/each}}	
+					{{else}}
+					{{> spinner}}
+					{{/if}}		
+					
+	</div><!--end container -->
+
+</template>
+
+<template name="eDiagEta">
+{{#if diagetaStatus "6"}}
+	<span style="color:red; margin:0px;"><i class="fa fa-rocket fa-lg"></i></span>
+{{else}}
+	<span style="color: #216cc3; margin:0px;"><i class="fa fa-paper-plane fa-lg"></i></span>
+{{/if}}
+</template>
+
+
+

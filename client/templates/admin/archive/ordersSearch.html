@@ -1,0 +1,71 @@
+<template name="ordersSearch">
+
+ {{> EasySearch.Input index=index attributes=inputAttributes }}
+
+ {{#EasySearch.IfInputEmpty index=index }}
+    <div class="padded examples">Search by Order ID or Customer Name</div>
+  {{else}}
+    {{#if resultsCount}}
+      <div class="padded count-results">{{resultsCount}} results found.</div>
+    {{/if}}
+  {{/EasySearch.IfInputEmpty}}
+
+  {{#EasySearch.IfSearching index=index }}
+    <div>Searching</div>
+  {{/EasySearch.IfSearching }}
+
+  <div style="background-color:#216cc3;" class="row">
+	  <div style="color:#fff;" class="col-md-4"> <h4>Order ID:</h4></div>
+	  <div style="color:#fff;" class="col-md-4"> <h4>Order Date:</h4></div>
+	  <div style="color:#fff;" class="col-md-4"> <h4>Customer Name:</h4></div> 
+  </div>
+    {{#EasySearch.Each index=index }}
+      {{> order}}
+    {{/EasySearch.Each}}
+
+  
+
+ 
+  {{#EasySearch.IfNoResults index=index }}
+    <div>No results found</div>
+  
+  {{/EasySearch.IfNoResults }}
+ 
+  {{> EasySearch.Pagination index=index maxPages=10 }}
+  {{! > EasySearch.LoadMore index=index }}
+
+  {{#if showMore}}
+    {{> EasySearch.Input name="mini-index" index=index attributes=inputAttributes }}
+
+    <ul>
+      {{#EasySearch.Each name="mini-index" index=index }}
+        <li>{{orderId}}</li>
+      {{/EasySearch.Each}}
+    </ul>
+  {{/if}}
+
+</template>
+<template name="order">
+
+<div style="border:1px solid #216bc3;" class="row">
+  <div style="color:#216bc3;" class="col-md-4"> <h4>{{orderId}}</h4></div>
+  <div style="color:#216bc3;" class="col-md-4"> <h4>{{momentTime orderDate}}</h4></div>
+  <div style="color:#216bc3;" class="col-md-4"> <h4>{{custName}}</h4></div> 
+</div>
+<div style="background-color:#eee;" class="row">
+	<div class="col-md-4"> <h4>Diagram ID:</h4></div>
+    <div class="col-md-4"> <h4>Report Type:</h4></div>
+    <div class="col-md-4"> <h4>Price:</h4></div> 
+
+</div>
+    {{#each diagram}}
+<div style="border:1px solid #eee;" class="row">
+	<div class="col-md-4"> <h4>{{id}}</h4></div>
+    <div class="col-md-4"> <h4>{{reporttype}}</h4></div>
+    <div class="col-md-4"> <h4>{{price}}</h4></div> 
+
+</div>
+    {{/each}}
+    
+ 
+</template>

@@ -1,0 +1,90 @@
+<template name="a_emp_bar">
+
+<div class="col-md-3" id="employees">
+	<div style="border:1px solid #040e1b; background-color:#fff; padding:1px;" class="panel-default list-group">
+				{{#if Template.subscriptionsReady}}
+				{{#each employee}}
+				{{#if isEmpReady}}
+			 		<div style="padding:3px;" class="panel-heading">
+			 		<a href="#{{_id}}" style="background-color:{{adminColorStatus}};" class="list-group-item list-group-item-info" data-toggle="collapse" data-parent="#employees">
+			 		<h3 style="color:#fff;" class="panel-title">{{> level}} {{profile.firstName}} {{profile.lastName}}</h3>
+			 		</a>
+			 		</div>
+
+						 <div class="collapse" id="{{_id}}">
+						 <div class="panel-body">
+						 {{#if isQC}}
+
+						 	<div style="background-color:#eee; padding:3px;" class="row">
+                        		<div style="text-align:center;">
+                            	<h5>In QC Mode</h5>
+               	  				</div>
+               	  			</div>
+               	  		{{else}}
+						 				
+		 					<div style="background-color:#eee; padding:3px;" class="row">
+                        		<div>
+                            	<h5>Diagram Status</h5>
+               	  				</div>
+               	  			</div>
+                        	{{#with empDiagStatus _id}}
+                    		<div style="margin-top:10px; padding-bottom:5px;" class="row">
+                        		<div class="col-sm-4">
+                                	Requested:
+                           		</div>
+                            	<div class="col-sm-2">
+                                	{{diagsRequested}}
+                            	</div>
+                            	<div class="col-sm-3">
+                                	Sent: 
+                           		</div>
+                            	<div class="col-sm-3">
+                                	<button style="float:left;" type="button" data-toggle="modal" data-target="#empDiagModal" id="{{_id}}viewEmpDiags" class="clickViewEmpDiags btn btn-info btn-xs">{{diagsSent}}</button>
+                            	</div>
+                            </div>
+				                            
+                        	<div class="row">
+                        		<div style="background-color:#eee;" class="col-sm-12">
+                            	
+                       			</div>
+                        	</div>
+                        	{{/with}}
+                       
+                        
+                        
+                        {{/if}}
+			                            	
+			            </div>
+			            </div>
+			
+		 			{{/if}} 
+		         	{{/each}}
+				 	{{else}}
+					{{> spinner}}
+				 	{{/if}}		
+						      			
+	</div>	
+</div>
+				
+ 				
+				{{> a_emp_bar_modal}}
+						
+
+
+</template>
+
+<template name="level">
+{{#if empLevel "employee2"}}
+	<i class="fa fa-user-plus"></i>
+{{/if}}
+{{#if empLevel "employee1"}}
+	<i class="fa fa-user"></i>
+{{/if}}
+{{#if empLevel "admin"}}
+	<i class="fa fa-fort-awesome"></i>
+{{/if}}
+{{#if empLevel "emp2qc"}}
+	<i class="fa fa-certificate"></i> <i class="fa fa-user-plus"></i>
+{{/if}}
+
+</template>

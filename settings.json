@@ -1,0 +1,16 @@
+
+{
+  "AWSAccessKeyId":"AKIAIHV7YBIJAC3EVIWQ",
+  "AWSSecretAccessKey":"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",
+  "stripe":{
+    "secret":"sk_test_3CpDHWspADMmw2SI8ZdaMIjb"
+  },
+  "public":{
+    "publishableKey":"pk_test_4qOaUDcYux7reFpqFlqw6bzb",
+  "publiKeyMailgun":"pubkey-7bdeda06284d1331441f9f7bb075dc80"
+  },
+  "mailgun":{
+    "apiKey":"key-ed7e278a5dc9889c0183d04c8dcac2cf",
+  "domain":"sandbox683b8eba177c45f4b431f5f487a4fa9e.mailgun.org"
+  }
+}

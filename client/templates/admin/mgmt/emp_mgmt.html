@@ -1,0 +1,63 @@
+<template name="emp_mgmt">
+<div class="pull-right"><h2>Employee Management</h2></div>
+
+	<div class="row">
+
+			<div style="margin-bottom:10px;" class="row">
+    			<div class="col-md-2"><button type="submit" id="addEmp" class="btn btn-orangeltbg btn-md">Add Employee</button></div>
+    			<div class="col-md-8"><h4><i class="fa fa-exclamation-circle"></i> "Roles" must follow the format: employee1, employee2, admin
+    			</h4></div>
+    		</div>
+
+    			
+			<div class="row">
+
+				<div class="col-md-2">First Name: <input type="text" class="form-control plain" id="f_name"/></div>
+				<div class="col-md-2">Last Name: <input type="text" class="form-control plain" id="l_name"/></div>
+				<div class="col-md-2">Email: <input type="text" class="form-control plain" id="email"/></div>
+				<div class="col-md-2">Phone: <input type="text" class="form-control plain" id="phone"/></div>
+				<div class="col-md-2">Role: 
+					<select  id="empRoleSelect" class="form-control">
+						<option value="" disabled="disabled" selected="selected">Select</option>
+						<option value="1">Employee 1</option>	
+						<option value="2">Employee 2</option>
+						<option value="3">Admin</option>										
+					</select>
+				</div>
+				<div class="col-md-2">Password: <input type="text" placeholder="6 or more characters" class="form-control plain" id="password"/></div>
+			</div>
+			<div class="row">
+    			<div class="col-md-12">
+
+    				<hr>
+    				<i class="fa fa-pencil"></i> Click in field to edit. Enter to save.<br><br>
+						 {{#if Template.subscriptionsReady}}
+							{{#each editEmployees}}
+
+
+						  	<div class="row">
+						  		<div class="col-md-2"><strong>First Name:</strong><div class="editable-text-trigger editField"> {{> editableText collection="users" field="profile.firstName"}}
+	              			 	</div></div>
+	              			 	<div class="col-md-2"><strong>Last Name:</strong><div class="editable-text-trigger editField"> {{> editableText collection="users" field="profile.lastName"}}
+	              			 	</div></div>
+	              			 	<div class="col-md-2"><strong>Email:</strong><div class="editable-text-trigger editField"> {{> editableText collection="users" field="emails.0.address"}}
+	              			 	</div></div>
+	              			 	<div class="col-md-2"><strong>Phone:</strong><div class="editable-text-trigger editField"> {{> editableText collection="users" field="profile.phone"}}
+	              			 	</div></div>
+	              			 	<div class="col-md-2"><strong>Role:</strong><div class="editable-text-trigger editField"> {{> editableText collection="users" field="profile.role"}}
+	              			 	</div></div>
+	              			 	<div style="text-align:left;" class="col-md-2"><button style="margin-top:13%;" type="submit" id="deleteEmp" class="btn btn-orangeltbg btn-sm"><i class="fa fa-times-circle"></i></button></div>
+
+						  	</div>
+
+						  	{{/each}}
+						  	{{else}}
+							Loading...
+							{{/if}}
+
+
+				</div>
+            </div>
+      </div>
+
+</template>

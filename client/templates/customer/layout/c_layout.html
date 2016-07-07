@@ -1,0 +1,29 @@
+<body>
+  {{renderPage}}
+</body>
+<template name="c_layout">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        {{> c_nav}}
+      </div>
+    </div>
+<span style="display:block; margin-top: 100px;">
+ <div class="row">
+      <div class="col-md-12">
+       {{> sAlert}}
+          
+      </div>
+    </div>
+    <div class="row">
+     
+      <div class="col-md-12">
+     
+        {{> yield}}
+      </div>
+     
+    </div>
+  </span>
+  </div>
+  {{> c_footer}}
+</template>

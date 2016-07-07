@@ -1,0 +1,92 @@
+<template name="orderPlaceModal">
+ <div id="order_place_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content credit-card-box">
+      <div class="modal-header">
+          <div class="row">
+              <div class="col-md-6">
+                    <h2 class="panel-title">Secure Checkout <i class="fa fa-lock"></i></h2>
+              </div>
+              <div class="col-md-6">
+                    <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+              </div>
+          </div>
+      </div>
+
+      <div class="modal-body">
+
+      {{#if showCardForm}}
+      <form id="porccess_order">
+        <div class="row">
+            <div class="form-group col-md-12">
+
+                  <label for="card_number">CARD NUMBER</label>
+                  <input type="text"  class="form-control plain" id="card_number" placeholder="card number"/>
+
+
+            </div>
+        </div>
+        <div class="row">
+                <div class="form-group col-md-1"> </div>
+
+                <div class="form-group col-md-6">
+                    <div class="row">
+                      <label for="exp_month">EXPIRATION</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                        <input type="text" class="form-control plain" maxlength="2" id="exp_month" placeholder="MM">
+                        </div>
+                        <div class="col-md-3">
+                        <input type="text" class="form-control plain" maxlength="2" id="exp_year" placeholder="YY">
+                        </div>
+                     </div>
+                </div>
+                <div class="form-group col-md-3 pull-right">
+
+                        <label for="cvc">CV CODE</label>
+                        <input type="password" class="form-control plain" maxlength="3" size="3" cvc="123" id="cvc" placeholder="cvc">
+
+                </div>
+
+        </div>
+
+        <div class="row">
+              <div class="col-md-12">
+                {{#if isAlreadyCustomer}}
+                <button type="button" class="btn btn-large" id="cancel_new_card">Cancel</button><br><br>
+                <button type="button" class="btn btn-large" id="submit_new_card">Add New Card</button><br>
+                {{else}}
+                <button class="btn btn-success btn-lg btn-block" type="submit" id="submit">Pay</button>
+                {{/if}}
+              </div>
+        </div>
+      </form>
+       {{else}}
+
+       {{#with showCustomerData}}
+         {{#each this.sources.data}}
+            Credit card ending with XXXX-XXXX-XXX-{{this.last4}}<br>
+            {{#if isDefault this.id}}<strong>DEFAULT</strong>{{else}}<button type="button" class="btn btn-large" id="change_to_default">Change To Default</button><br>{{/if}}<br>
+            <button type="button" class="btn btn-large" id="delete_card">Delete Card</button><br>
+            <hr>
+         {{/each}}<br>
+         <button type="button" class="btn btn-large" id="add_new_card">Add New Card</button><br>
+       {{/with}}
+     <div style="margin-left:50%;"><button type="button" class="btn btn-large" id="make_payment">Pay</button></div><br>
+      {{/if}}
+      <div style="width:50%; margin-left:80%;"><h4>Total: {{totalToCharge}}</h4></div>
+      </div>
+      {{#if showError}}
+        {{errorMessage}}
+      {{/if}}
+      <div class="modal-footer">
+
+      </div>
+    </div>
+
+  </div>
+</div>
+</template>

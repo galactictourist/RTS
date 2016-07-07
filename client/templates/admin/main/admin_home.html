@@ -1,0 +1,478 @@
+<template name="admin_home">
+	<div style="margin-bottom:5px;" class="row">
+
+
+			{{> a_emp_bar}}
+
+
+
+        <div id="orders" class="col-md-9">
+        	<div class="emppanel with-nav-tabs panel-primary">
+	                <div class="panel-heading" style="background-color:#040e1b;">
+	                        <ul class="nav nav-tabs">
+	                            <li class="active"><a href="#home" data-toggle="tab"><i class="fa fa-fort-awesome"></i> Orders
+	                            		{{#if newOrderCount}}
+	                            		<span class="label label-warning">{{newOrderCount}}</span>
+	                            		{{/if}}</a>
+	                            </li>
+	                            <li><a href="#diagrams" data-toggle="tab"><i class="fa fa-file-text"></i> My Sketches</a></li>
+	                              <li><a href="#qc" id="qcTab" data-toggle="tab"><i class="fa fa-certificate"></i> QC
+
+	                              		{{#if newQCCount}}
+	                            		<span class="label label-warning">{{newQCCount}}</span>
+	                            		{{/if}}</a>
+	                             </li>
+	                            <li><a href="#messages" data-toggle="tab"><i class="fa fa-bullhorn"></i> Messages</a></li>
+	                           <!-- <li><a href="#calendar" data-toggle="tab"><i class="fa fa-calendar-check-o"></i> Calendar</a></li>-->
+	                            <li><a href="#data" data-toggle="tab"><i class="fa fa-wrench"></i> Data Management</a></li>
+
+	                            <li><a href="#archive" data-toggle="tab"><i class="fa fa-archive"></i> Archive</a></li>
+ 								<li style="float:right;"><div style="margin-right:5px;"><i class="fa fa-thumbs-o-up"></i> {{#with currentUser}}{{#with profile}}Hello, {{firstName}}{{/with}}{{/with}}</div></li>
+ 								 <li><a href="#reports" data-toggle="tab"><i class="fa fa-line-chart"></i> Reports</a></li>
+
+	                        </ul>
+	                </div>
+	                <div style="margin-bottom:20px;" class="panel-body">
+	                    <div class="tab-content">
+                        	<div class="tab-pane fade in active" id="home"><!--  Begin Home Tab -->
+                        		<div class="container-fluid">
+
+                        			<div style="border:1px solid #040e1b; padding:5px;" class="panel-default list-group">
+			 		<div class="panel-heading panel-primary" style="padding:5px;"><a href="#neworder" class="list-group-item" data-toggle="collapse" data-parent="#orders"><h4>Orders <span class="label label-primary">{{orderCount}}</span></h4></a>
+			 		</div>
+			 			<div style="margin-bottom:5px; padding:5px;" class="collapse" id="neworder">
+
+					 			{{#if Template.subscriptionsReady}}
+									{{#each order}}
+										{{orderStatusCheck qcNum}}
+					            	<a href="#{{orderId}}" class="list-group-item" style="border:3px solid {{ColorStatusOrder}}; margin-bottom: 5px; max-height: 50px;" data-toggle="collapse" data-parent="#{{orderId}}">
+				<!--top order bar--><div class="row" style="margin-bottom:5px;">
+					            		<div  class="col-sm-1">
+					            			{{statusProgress}}
+					            		</div>
+					            		<div  class="col-sm-3">
+											<strong>Date:</strong> {{momentTime}}
+					            		</div>
+					            		<div class="col-sm-3">
+					            			<strong>Client:</strong> {{custName}}
+					            		</div>
+					            		<div  class="col-sm-2">
+					            			<strong>ID:</strong> <span style="font-size:larger;"><strong>{{orderId}}</strong></span>
+					            		</div>
+					            		<div class="col-sm-1">
+					            			<strong>D: ({{returnCount diagram}})</strong>
+					            		</div>
+					            		<div class="col-sm-2">
+
+					            			<div  class="progress">
+    										<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="" aria-valuemin="" aria-valuemax=""  style="width:{{progress}}; text-align:middle;"></div>
+											</div>
+
+					            		</div>
+
+					            	</div></a>
+
+			           			 <div class="collapse list-group-submenu" id="{{orderId}}">
+
+			           			 	{{# each diagram}}
+
+					              			<div style="background-color:#d7e6f8; padding:0px; border: 2px solid {{borderColorStatus}} margin-bottom:7px;" class="list-group-item clearfix" data-parent="#{{orderId}}">
+
+					              				<div class="row" style="padding:5px;">
+					              					<div class="col-md-2" style="white-space:nowrap;">
+					              						{{> eta}} <strong>ID: {{id}}</strong>
+					              					</div>
+
+					              					<div class="col-md-6">
+					              						<strong>Address:</strong> {{address}}
+					              					</div>
+					              					<div class="col-md-2">
+					              						<a style="margin-right:5px;" class="btn btn-default btn-sm clearfix" href="https://www.google.com/maps/place//@{{lat}},{{lon}},400m/data=!3m1!1e3!4m5!3m4!1s0x0:0x0!8m2!3d{{lat}}!4d{{lon}}" target="_blank"><span style="color: #216cc3;">Map</span></a>
+
+					              						<!--http://maps.google.com/maps?q={{lat}},{{lon}}&z=25&t=k" target="_blank"><span style="color: #216cc3;">Map</span></a>-->
+					              						
+					              					
+					              					</div>
+					              					<div class="col-md-2">
+					              						{{#each imgurls}}
+					              						<a class="btn btn-default btn-sm clearfix" href="{{this}}" target="_blank"><span style="color: #216cc3;"><i class="fa fa-file-image-o fa-lg"></i></span></a>
+					              						{{/each}}
+					              					</div>
+
+					              				</div>	
+					              				<hr style="border-top:1px solid #216cc3; margin:0px;">
+					              				<div class="row" style="padding:5px;">
+					              					<div class="col-md-2">
+					              						<strong>Name:</strong> {{insName}}
+					              					</div>
+					              					<div class="col-md-2">
+					              						<strong>Price:</strong> {{price}}
+					              					</div>
+					              					<div class="col-md-2">
+					              						<strong>Report:</strong> {{reporttype}}
+					              					</div>
+					              					<div class="col-md-2">
+					              						<strong>Pitch:</strong> {{pitch}}
+					              					</div>
+					              					<div class="col-md-2">
+					              						<strong>Facets:</strong> {{facets}}
+					              					</div>
+					              					<div class="col-md-2">
+					              						<strong>Type:</strong> {{structure}}
+					              					</div>
+
+					              				</div>
+					              				<hr style="border-top:1px solid #216cc3; margin:0px;">
+					              				<div class="row" style="padding:5px;">
+					              					<div class="col-md-1">
+					              					<div class="form-group">
+														<label class="plain">Level</label>
+														<select id="{{id}}level" class="selectLvl form-control">
+														  <option {{diagLvl "0"}} value="0">0</option>
+														  <option {{diagLvl "1"}} value="1">1</option>
+														  <option {{diagLvl "2"}} value="2">2</option>
+														    <option {{diagLvl "3"}} value="3">3</option>
+														</select>
+													</div>
+
+					              					</div>
+					              					<div class="col-md-3">
+						              					{{> empAssign}}
+
+					              					</div>
+					              					<div class="col-md-3">
+
+														<strong>Assigned To:</strong> <span id="d-ID" style="font-size:larger; color:#216cc3;"><strong>{{sketcherName}}</strong></span><br>
+														{{#if qcAssigned}}
+														<strong>QC:</strong> <span id="d-ID" style="font-size:larger; color:#216cc3;"><strong>{{qcAssigned}}</strong></span>
+															
+														{{/if}}
+
+
+					              					</div>
+					              					<div class="col-md-3">
+					              							{{#if notDelivered}}
+						              						<strong> {{momentDuration}}	</strong>
+						              						{{/if}}
+														<h4>Status: <span id="d-ID" class="label label-success"> {{diagStatus}}</span></h4>
+
+					              					</div>
+					              					<div class="col-md-2">
+						              						{{#if ifComments}}
+						              						<button data-toggle="modal" data-target="#commentsModal" id="btnCom{{id}}" class="comments btn btn-info btn-xs"><span style="font-size:large;"><i class="fa fa-comments"></i></span></button>
+														
+															{{/if}}
+					              					</div>
+
+					              				</div>
+
+											</div>
+
+			             			{{/each}}
+			            		</div><!--end listgroup submenu orderid-->
+
+			            {{/each}}
+
+								{{else}}
+									{{> spinner}}
+								{{/if}}
+			     </div><!--div new order end-->
+			 </div><!--end panel listgroup-->
+
+								</div>
+
+                        	</div>
+                        	<div class="tab-pane fade" id="diagrams">
+                        		<div class="container-fluid" style="position:relative; margin-top:30px;">
+                        		{{#if Template.subscriptionsReady}}
+                        			{{# each myDiagram}}
+
+                        			<div style="width:100%; border: 2px solid {{borderColorStatus}} margin-bottom:17px; display:inline-block;" class="list-group-item clearfix">
+                        			<div style="width:200px; height:30px; position:absolute; top:-23px; right:5px;"><span style="font-size:larger;"><strong>Order ID: {{oid}}</strong></span></div>
+
+					              				<div class="row" style="margin-bottom:10px; border-bottom: 1px solid #eee; padding:5px;">
+					              					<div class="col-md-2" style="white-space:nowrap;">
+					              						{{> eta}} <strong>ID: {{id}}</strong>
+					              					</div>
+
+					              					<div class="col-md-6">
+					              						<strong>Address:</strong> {{address}}
+					              					</div>
+					              					<div class="col-md-2">
+					              						<a style="margin-right:5px;" class="btn btn-default btn-sm clearfix" href="http://maps.google.com/maps?q={{lat}},{{lon}}&z=25&t=k" target="_blank"><span style="color: #216cc3;">Map</span></a>
+					              					</div>
+					              					<div class="col-md-2">
+					              						{{#each imgurls}}
+					              						<a class="btn btn-default btn-sm clearfix" href="{{this}}" target="_blank"><span style="color: #216cc3;"><i class="fa fa-file-image-o fa-lg"></i></span></a>
+					              						{{/each}}
+					              					</div>
+
+					              				</div>
+					              				<div class="row" style="margin-bottom:10px; border-bottom: 1px solid #eee; padding:5px;">
+					              					<div class="col-md-3">
+					              						<h4>Status: <span id="d-ID" class="label label-info"> {{diagStatus}}</span></h4>
+					              					</div>
+					              					<div class="col-md-2">
+					              						<strong>Name:</strong> {{insName}}
+					              					</div>
+					              					<div class="col-md-2">
+					              						<strong>Price:</strong> {{price}}
+					              					</div>
+					              					<div class="col-md-2">
+					              						<strong>Type:</strong> {{structure}}
+					              					</div>
+					              					<div class="col-md-3">
+					              						<strong> {{momentDuration}}</strong>
+					              					</div>
+					              				</div>
+					              				<div class="row" style="margin-bottom:10px; border-bottom: 1px solid #eee; padding:5px;">
+					              					<div class="col-md-2">
+
+					              						<div class="form-group">
+															<label class="plain">Update</label>
+															<select  id="{{id}}Update" class="update form-control">
+															{{updateStatus}}
+
+															</select>
+														</div>
+
+
+					              					</div>
+					              					<div class="col-md-2">
+					              						<strong>Report:</strong> {{reporttype}}
+					              					</div>
+					              					<div class="col-md-2">
+					              						<strong>Pitch:</strong> {{pitch}}
+					              					</div>
+					              					<div class="col-md-2">
+					              						<strong>Facets:</strong> {{facets}} <label id="{{id}}fCount" style="display:none;">{{facetCount}}</label>
+					              					</div>
+
+
+					              				</div>
+					              				<div class="row" style="margin-bottom:10px; padding:5px;">
+
+
+					              					<div class="col-md-12">
+						              					{{#if qcDivShow "show"}}
+
+															{{> aqcDiv}}
+
+
+														{{/if}}
+
+
+					              					</div>
+
+
+					              				</div>
+
+
+											</div>
+
+										{{/each}}
+
+										{{else}}
+										{{> spinner}}
+										{{/if}}
+									</div><!--end container -->
+							</div><!--end diagrams pane-->
+
+	                        <div class="tab-pane fade" id="messages">
+
+
+	                        	<div style="border:1px solid #eee;" class="container-fluid">
+		                        		<div style="margin-bottom:15px; background-color:#90d1fc; border:1px solid #0a2339;" class="row">
+		                        			<div style="border-right:1px solid #fff;" class="col-md-6">
+		                        			<h4>Customer Messages</h4>
+		                        			</div>
+		                        			<div style="border-left:1px solid #fff;" class="col-md-6">
+		                        			<h4>Employee Messages</h4>
+		                        			</div>
+		                        		</div>
+	                        			<div class="row">
+		                        			<div  class="col-md-6">
+												
+												 {{#if Template.subscriptionsReady}}
+													{{#each custMsgs}}
+													<!--{{#each diagram}}-->
+												<div class="row" style="overflow:hidden; margin:5px; border:1px solid #555; padding:5px;">
+													<div style="background-color:#eee; padding:5px;" class="row">
+														<div class="col-sm-6">
+														<strong>From:</strong> {{custName}}
+														</div>
+														<div class="col-sm-6">
+														<strong>Order ID:</strong> {{oid}}
+														</div>
+														
+													</div>
+													
+													<div style="background-color:#eee; padding:5px;" class="row">
+														<div class="col-sm-5"><strong>Sent:</strong> {{anyMomentTime feedbackdate}}
+														</div>
+														<div class="col-sm-4"><strong>Diag ID:</strong> {{id}}
+														</div>
+														<div class="col-sm-3">
+														<strong>Type:</strong> {{feedbackCat}}
+														</div>
+														
+													</div>
+													<div class="row">
+														<div style="border:1px solid #eee; padding:5px; margin:5px;" class="col-sm-12"><p>{{feedbacktext}}</p>
+														</div>
+													</div>
+												
+												  	
+												  	</div>
+												  	<!--{{/each}}-->
+												  	{{/each}}
+												  	{{else}}
+													{{> spinner}}
+													{{/if}}
+													
+												
+		                        			</div>
+	                        				<div style="border-left:1px solid #eee;" class="col-md-6">
+	                        				<div class="form-group">
+												<label class="plain"><h4>Send Message To:</h4></label>
+												<select  id="msgEmp" class="form-control">
+												<option disabled="disabled" value="" selected="selected">Select</option>
+
+													 {{#if Template.subscriptionsReady}}
+														{{#each msgEmployee}}
+														<option value="{{_id}}">{{profile.firstName}} {{profile.lastName}} </option>
+														{{/each}}
+														{{else}}
+														{{> spinner}}
+													{{/if}}
+
+												</select>
+
+											  <label for="comment"><h4>Message:</h4></label>
+											  <textarea class="form-control" rows="5" id="msg"></textarea><br>
+											  <div class="pull-right"><button type="submit" id="sendEmpMsg" class="btn btn-orangeltbg btn-sm">Send</button>
+											</div>
+											</div>
+										
+										<br><br>
+											
+											<h4>Unread Messages</h4>
+											<ul class="list-group">
+											 {{#if Template.subscriptionsReady}}
+												{{#each unreadMsgs}}
+												{{#with msgEmpName}}
+											  <li class="list-group-item"><strong>To:</strong> {{profile.firstName}} {{profile.lastName}} <strong>Sent:</strong> {{msgDate}}</li>
+											  	{{/with}}
+											  	{{/each}}
+											  	{{else}}
+												{{> spinner}}
+												{{/if}}
+
+											</ul>
+											</div>
+										
+	                        			</div>
+
+										
+								</div><!-- end container -->
+
+
+	                        </div>
+	                        <div class="tab-pane fade" id="qc">
+	                        {{#if Template.subscriptionsReady}}
+	                        	{{#if qadminSelect}}
+	                       			{{> q_admin_select}}
+	                       		{{else}}
+	                       			{{> q_admin}}
+	                       		{{/if}}
+	                        	
+	                       	{{else}}
+							{{> spinner}}
+							{{/if}}
+	                        </div>
+	                      <!--  <div class="tab-pane fade" id="calendar">
+	                        	<div class="container">
+                        			[obviously problems here with CSS]
+                        				{{> fullcalendar }}
+
+
+                        		</div>
+
+	                        </div>-->
+	                        <div class="tab-pane fade" id="data">
+
+	                        	<div class="container-fluid">
+
+	                        		<div class="row">
+	                        			<div class="col-md-3">
+	                        			<button id="btn_emp_mgmt" type="button" class="btn btn-orangeltbg navbar-btn pull-left"><span style="font-size:larger;"><i class="fa fa-user fa-border"></i> Employee Management</span></button>
+											
+										</div>
+										
+                        				<div class="col-md-3">
+                        				<button id="btn_cust_mgmt" style="margin:left:20px;" type="button" class="btn btn-orangeltbg navbar-btn"><span style="font-size:larger;"><i class="fa fa-diamond fa-border"></i> Customer Management</span></button>
+											
+										</div>
+									</div>
+										
+									
+									<hr>
+									{{#if Template.subscriptionsReady}}
+										{{#if eMgmtTemplate}}
+											{{> emp_mgmt}}
+										{{/if}}
+
+										{{#if cMgmtTemplate}}
+											{{> cust_mgmt}}
+										{{/if}}
+									{{else}}
+									{{> spinner}}
+									{{/if}}
+                        			
+								</div><!-- end container -->
+	                        </div>
+	                         <div class="tab-pane fade" id="archive">
+
+	                        	<div class="container-fluid">
+	                        		{{#if Template.subscriptionsReady}}
+                        				{{> ordersSearch }}
+                        			{{else}}
+									{{> spinner}}
+									{{/if}}
+
+								</div><!-- end container -->
+
+	                        </div>
+	                         <div class="tab-pane fade" id="reports">
+
+	                        	<div class="container-fluid">
+
+                        			<h4>Reports</h4>
+
+								</div><!-- end container -->
+	                        </div>
+
+	                    </div><!--end tab content -->
+	                </div><!--panel body end-->
+	            </div><!--end main panel-->
+
+
+		</div><!--end column-->
+
+    </div><!--end row-->
+						
+
+
+</template>
+
+
+
+
+
+<template name="eta">
+{{#if etaStatus "6"}}
+	<span style="color:red;"><i class="fa fa-rocket fa-lg"></i></span>
+{{else}}
+	<span style="color: #216cc3;"><i class="fa fa-paper-plane fa-lg"></i></span>
+{{/if}}
+</template>

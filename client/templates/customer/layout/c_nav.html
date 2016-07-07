@@ -1,0 +1,78 @@
+<template name="c_nav">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+       <button type="button" class="navbar-toggle" data-toggle="collapse"
+                data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+
+        </button>
+      <a class="navbar-brand" href="#">
+        <img alt="Ridge Top" src="/img/logo.png">
+      </a>
+    </div>
+     <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+         <li></li>
+          <li></li>
+          
+          
+        </ul>
+         <ul class="nav navbar-nav navbar-right">
+           
+              <li style=""><img src="/img/geotrust.png"></li>
+    
+              <li>
+                <a href="/signout"><button type="button" class="btn-sm btn-orange navbar-btn"><i class="fa fa-lock"></i> Sign Out</button></a>
+
+              </li>
+            
+        </ul>
+        
+      </div>
+  </div>
+</nav>
+
+
+ 
+</template>
+
+
+
+
+
+
+<!--<template name="admin_nav">
+	<nav role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="/admin" class="navbar-brand">Sketch360</a> <br>
+
+        <ul>
+          by default, everyone can see all links 
+          <li><a href="/admin/thing1">Item 1</a></li>
+          <li><a href="/admin/thing2">Item 2</a></li>
+          <li><a href="/admin/thing3">Item 3</a></li>
+
+         superadmin & employer2 cannot see this link 
+           there is no "if not" in Blaze, so use #unless 
+
+         helper format: helperName arg1 arg2 arg3 ... 
+          {{#unless userIsInRoles "superadmin" "employee2"}}
+            <li><a href="/admin/thing4">Item 4</a></li>
+          {{/unless}}
+
+          <li><a href="/admin/thing5">Item 5</a></li>
+
+         this link only visible to superadmin and qc-manager 
+          {{#if userIsInRoles "superadmin" "qc-manager"}}
+            <li><a href="/admin/thing6">Item 6</a></li>
+          {{/if}}
+        </ul>
+			</div>
+		</div>
+	</nav>
+</template>-->

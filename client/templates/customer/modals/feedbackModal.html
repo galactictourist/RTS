@@ -1,0 +1,44 @@
+<template name="feedbackModal">
+ 
+  <div class="modal fade" id="feedback_modal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="border-bottom:2px solid #ba453b; background-color:#eee;"><span style="color:#ba453b; font-size:large;"><strong><i class="fa fa-bullhorn"></i> Feedback on Diagram ID {{diagInfo}}</strong></span></div>
+        
+        <div class="modal-body">
+          <div class="container">
+            <div class="row" style="margin-bottom:10px;">
+              <div class="col-md-2">
+                 <select id="fb_category" class="form-control">
+                  <option value="" disabled="disabled" selected="selected">Select</option>
+                  <option value="Praise">Praise</option>
+                  <option value="Problem">Problem</option>
+                  <option value="Suggestion">Suggestion</option>     
+                </select>
+              </div>
+              <div class="col-md-10">
+              <p><strong>Please select a feedback category</strong></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                 <label for="fb_comment">Comments:</label>
+                 <textarea class="form-control" rows="5" id="fb_comment"></textarea>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer" style="background-color:#216cc3;">
+          
+          <button class="btn btn-default" type="button" id="sendFeedback">Send</button>
+      
+          <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+ 
+</template>

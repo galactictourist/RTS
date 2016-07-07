@@ -1,0 +1,43 @@
+<template name="eqcDiv"> 
+{{#if isLvlTwo}}
+	<div class="col-md-2">
+
+		<label>Add Extra File</label>
+		<input style="font-size: x-large; background-size:10px" id="addFile{{id}}" class="addFile" type="checkbox" value="">
+	</div>
+{{/if}}
+		<div class="col-md-6">
+			{{>e_fileList}}
+			    
+	
+		</div>
+		<form class="form-inline">
+	                        					
+		<div class="col-md-2">
+			<div class="form-group">
+			       
+			       <label for="qcFacets">Facet Count</label>
+			      	<input type="text" data-id="{{id}}" style="max-width:50px;" class="QCfacets form-control" id="{{id}}qcFacets" placeholder="">
+			      
+					
+			    </div>
+		</div>
+		<div class="col-md-2">
+			<div class="form-group">
+			       
+			       {{#if isLvlTwo}}
+
+			       <button style="margin:10px;" type="submit" id="btnSendToCustomer" class="btn btn-primary">Send to Customer <i class="fa fa-external-link-square"></i></button>
+
+			       {{else}}
+
+			       <button style="margin:10px;" type="submit" id="btnSendQC" class="btn btn-primary">Send to QC <i class="fa fa-external-link-square"></i></button>
+
+			       {{/if}}
+					
+			    </div>
+		</div>
+		</form>
+
+
+</template>

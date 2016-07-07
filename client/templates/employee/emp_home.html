@@ -1,0 +1,250 @@
+<template name="emp_home">
+
+	<div style="margin-bottom:5px;" class="row">
+        <div style="float: none; margin: 0 auto;" class="col-md-10">
+	         	<div class="emppanel with-nav-tabs panel-primary">
+	                <div class="panel-heading">
+	                        <ul class="nav nav-tabs">
+	                            <li class="active"><a href="#home" id="hTab" data-toggle="tab">Home</a></li>
+
+	                            {{#if isInQC}}
+
+	                             <li><a href="#qc" id="eqcTab" data-toggle="tab"><i class="fa fa-certificate"></i> QC 
+	                             {{#if newQCCount}}
+	                            		<span class="label label-warning">{{newQCCount}}</span>
+	                            		{{/if}}</a></li>
+	                            
+
+	                            {{else}}
+
+	                             <li><a href="#diagrams" data-toggle="tab"><i class="fa fa-file-text"></i> My Sketches
+	                            {{#if newDiagCount}}
+	                            		<span class="label label-warning">{{newDiagCount}}</span>
+	                            		{{/if}}</a></li>
+
+	                            {{/if}}
+	                           
+	                            <li><a href="#messages" data-toggle="tab"><i class="fa fa-bullhorn"></i> Messages
+	                           			{{#if newMsgCount}}
+	                            		<span class="label label-warning">{{newMsgCount}}</span>
+	                            		{{/if}}</a>
+	                            </li>
+	                           <!-- <li><a href="#empcalendar" data-toggle="tab"><i class="fa fa-calendar-check-o"></i> Calendar</a></li>-->
+	                            <li><a href="#profile" data-toggle="tab"><i class="fa fa-info-circle"></i> Profile</a></li>
+	                            <li style="float:right;"><div style="margin-right:5px;"><i class="fa fa-thumbs-o-up"></i> {{#with currentUser}}{{#with profile}}Hello, {{firstName}}{{/with}}{{/with}}</div></li>
+	                           
+	                        </ul>
+	                </div>
+	                <div class="panel-body">
+	                    <div class="tab-content">
+                        	<div class="tab-pane fade in active" id="home"><!--  Begin Home Tab -->
+                        		<div class="container-fluid">
+                        		
+                        			<div class="row">
+                        				<div class="col-md-4">
+                        					<form class="form-inline">
+                        					<div class="form-group">
+                        						{{#with thisEmployee}}
+                        						{{#with profile}}
+                        						{{#if showGoQCButton}}
+
+                        							<button type="submit" id="goQC" style="margin-right:10px;" class="btn btn-orangeltbg btn-sm"><i class="fa fa-certificate"></i> Go QC</button>
+                        							
+                        							{{/if}}
+                        							{{#if isInQC}}
+                        							<button type="submit" id="quitQC" style="margin-right:10px;" class="btn btn-orangeltbg btn-sm"><i class="fa fa-certificate"></i> Quit QC</button>
+                        							{{/if}}
+												
+													<div style="font-size:larger; display: inline-block; margin:0px;">
+														
+
+														<div style="border:1px solid #333; padding:10px;" class="checkbox">
+														<span style="font-size: large;">Work Status</span>
+															<label><input  id="updateWorkStatus" {{wStatus workStatus}} type="checkbox" value=""> <strong>{{wStatusTxt workStatus}}</strong></label>
+														</div>
+													
+													</div>
+												{{/with}}{{/with}}
+											</div>
+											</form>
+                        				</div>
+                        				<div style="font-size:larger;" class="col-sm-4">
+                        				
+	                        					<form class="form-inline">
+	                        					<div class="form-group">
+	                        					 
+														<label for="srequest">Sketch Request</label>
+														<input style="width:50px;" type="text" class="form-control" id="srequest"/>
+													
+												</div>
+												<button type="submit" id="sketchrequest" class="btn btn-orangeltbg btn-sm">Send</button>	
+												</form>
+											
+                        				</div>
+                        				<div style="font-size:larger;" class="col-md-4"><label>Diagrams in Queue:</label> {{getSketchCount}}</div>
+                        				<div class="col-md-12"><hr class="style-two"></div>
+                        			</div>
+                        			
+                        			<div class="row">
+                        				<div class="col-md-12 empdash">
+
+	                        				<div class="row">
+	                        				<div class="col-md-6"><h2>My Stats</h2></div>
+	                        				<div class="col-md-6"><h2>Team Stats</h2></div>
+	                        				</div>
+	                        				
+	                        				<div class="row" style="background-color:#60D9B8;">
+	                        				<div style="border-right:3px solid #fff;" class="col-md-6"><h4>Today</h4></div>
+	                        				<div class="col-md-6"></div>
+	                        				
+	                        				</div>
+	                        				<div class="row">
+	                        				
+	                        					<div class="col-md-2"><h5>Sketches Requested: {{#with empStats}}{{diagsRequested}}{{/with}}</h5></div>
+				              					<div class="col-md-2"><h5>Sketches Received: {{#with empStats}}{{diagsSent}}{{/with}}</h5></div>
+				              					<div class="col-md-2"><h5>Stat: 0</h5></div>
+				              				
+	                        				
+	                        					<div class="col-md-2"><h5>Test: 0</h5></div>
+				              					<div class="col-md-2"><h5>Test: 0</h5></div>
+				              					<div class="col-md-2"><h5>Test: 0</h5></div>
+
+	                        				</div>
+	                        				<div class="row" style="background-color:#60D9B8;">
+	                        				<div style="border-right:3px solid #fff;" class="col-md-6"><h4>This Week</h4></div>
+	                        				<div class="col-md-6"></div>
+	                        				
+	                        				</div>
+	                        				<div class="row">
+	                        				
+	                        					<div class="col-md-2"><h5>Test: 0</h5></div>
+				              					<div class="col-md-2"><h5>Test: 0</h5></div>
+				              					<div class="col-md-2"><h5>Stat: 0</h5></div>
+				              				
+	                        				
+	                        					<div class="col-md-2"><h5>Test: 0</h5></div>
+				              					<div class="col-md-2"><h5>Test: 0</h5></div>
+				              					<div class="col-md-2"><h5>Test: 0</h5></div>
+
+	                        				</div>
+
+			
+					              						
+						              	</div><!--end big column -->
+						             </div><!--end big row -->
+						            
+								</div>
+
+                        	</div>
+                        	{{#if isInQC}}
+                        	<div class="tab-pane fade" id="qc">
+                        	
+                        		 {{#if Template.subscriptionsReady}}
+                           		{{#if qempSelect}}
+	                       			{{> q_emp_select}}
+	                       		{{else}}
+	                       			{{> q_emp}}
+	                       		{{/if}}
+                        		{{else}}
+                        		{{> spinner}}
+                       			{{/if}}	
+		              			
+							</div><!--end qc pane-->
+
+                        	{{else}}
+                        	<div class="tab-pane fade" id="diagrams">
+                        		{{#if Template.subscriptionsReady}} 
+                        			{{> esketch}}
+                        		{{else}}
+                        		{{> spinner}}
+                       			{{/if}}		
+		              				 
+							</div><!--end diagrams pane-->
+
+                        	{{/if}}
+                        	
+									
+	                        <div class="tab-pane fade" id="messages">
+		                        <div class="container-fluid">
+
+		                        	<div class="row">
+			                        	<div class="col-md-6">
+											<h4>Unread Messages</h4>
+											<ul class="list-group">
+											 {{#if Template.subscriptionsReady}}
+												{{#each unreadMsgs}}
+
+												{{#with msgAdminName}}
+											  <li style="background-color:#eee;" class="list-group-item"> 
+											  <strong>From:</strong> {{profile.firstName}} {{profile.lastName}} <strong>  Sent:</strong>  {{msgDate}} 
+											 </li>
+											  	{{/with}}
+											  	<li class="list-group-item"><strong>Message: </strong> {{message}}<br>
+											  	<button style="margin-left:80%;" type="submit" id="readMsg" class="btn btn-orangeltbg btn-sm">Read it</button></li>
+											  	{{/each}}
+											  	{{else}}
+												{{> spinner}}		
+												{{/if}}
+											
+											</ul>
+										</div>
+		                        	</div>
+		                        </div>
+	                        </div>
+	                        <!--<div class="tab-pane fade" id="empcalendar">
+	                        	<div class="container-fluid">
+                        			
+                        				{{> fullcalendar}}
+	
+                        				
+                        		</div>
+                        				
+	                        </div>-->
+	                        <div class="tab-pane fade" id="profile">
+	                        	
+	                        	<div class="container-fluid">
+                        			
+                        			<div class="row">
+                        				<div class="col-md-12">
+                        				<h4>Profile</h4>
+                        				<i class="fa fa-pencil"></i> Click in field to edit. Enter to save.
+                        				<hr>
+                    						<div class="row">
+	                    						 {{#each getProfileData}}
+
+	                    						<div class="col-md-2">
+				              						<strong>First Name:</strong><div class="editable-text-trigger editField"> {{> editableText collection="users" field="profile.firstName"}}
+						              			 	</div>
+	        									</div>
+	        									<div class="col-md-2">
+				              						<strong>Last Name:</strong><div class="editable-text-trigger editField"> {{> editableText collection="users" field="profile.lastName"}}
+						              			 	</div>
+	        									</div>
+	        									
+	        									
+	          
+	          					
+							       
+							      					{{/each}}
+						      					
+						      				</div>			
+						              	</div><!--end big column -->
+						             </div><!--end big row -->
+						             
+									</div><!-- end container -->
+	                        </div>
+
+	                    </div><!--end tab content -->
+	                </div><!--panel body end-->
+	            </div><!--end main panel--> 
+		</div><!--end big col-->
+	</div><!--end row-->
+
+
+</template>
+
+
+
+
+
+
