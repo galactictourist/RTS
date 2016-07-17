@@ -52,17 +52,25 @@
   <div style="color:#216bc3;" class="col-md-4"> <h4>{{momentTime orderDate}}</h4></div>
   <div style="color:#216bc3;" class="col-md-4"> <h4>{{custName}}</h4></div> 
 </div>
-<div style="background-color:#eee;" class="row">
-	<div class="col-md-4"> <h4>Diagram ID:</h4></div>
-    <div class="col-md-4"> <h4>Report Type:</h4></div>
-    <div class="col-md-4"> <h4>Price:</h4></div> 
 
-</div>
     {{#each diagram}}
 <div style="border:1px solid #eee;" class="row">
-	<div class="col-md-4"> <h4>{{id}}</h4></div>
-    <div class="col-md-4"> <h4>{{reporttype}}</h4></div>
-    <div class="col-md-4"> <h4>{{price}}</h4></div> 
+	<div class="col-md-3"> <h4>Diagram ID:</h4> {{id}}</div>
+    <div class="col-md-3"> <h4>Report Type:</h4> {{reporttype}}</div>
+    <div class="col-md-3"> <h4>Price:</h4> {{price}}</div> 
+    <div class="col-md-3"> <h4>Facets:</h4> {{qcFacets}}</div> 
+
+</div>
+<div style="border:1px solid #eee;" class="row">
+  <div class="col-md-6"> <h4>Address:</h4> {{address}}</div>
+  <div class="col-md-4"> <h4>Structure:</h4> {{structure}}</div>
+   <div class="col-md-2"> <h4>Pitch: </h4>{{pitch}}</div>
+
+</div>
+<div style="border:1px solid #eee;" class="row">
+ 
+  
+  <div class="col-md-12"> <h4>Sketches:</h4> {{#each getSketches}}  <a href="{{qsketchUrl}}" target="_blank">{{qsketchName}}</a> {{/each}}</div>
 
 </div>
     {{/each}}

@@ -4,10 +4,7 @@ Tracker.autorun(function () {
 });
 
 Template.ordersSearch.helpers({
-    getSketches: function () {
-      var diagID = this.id;
-      query = Sketches.find({'diagramId': diagID}).fetch();
-    },
+    
     inputAttributes: function () {
       return { 'class': 'easy-search-input', 'placeholder': 'Start searching...' };
     },
@@ -38,7 +35,17 @@ Template.ordersSearch.helpers({
         var oDate = moment(key).format('MM-DD-YY, h:mm a');
 
         return oDate;
-      }
+      },
+
+      getSketches: function () {
+      var diagID = this.id;
+
+      console.log('here' + diagID);
+
+       query = Sketches.find({'diagramId': diagID}).fetch();
+
+       return query; //need to parse out name and url from object`
+    }
 
 
   });
